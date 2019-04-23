@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
     <Button
-
+        android:background="@drawable/rounded_button"
         android:id="@+id/button4"
         android:layout_width="120dp"
         android:layout_height="80dp"
@@ -28,6 +28,7 @@
         android:layout_weight="1"/>
 
     <Button
+        android:background="@drawable/rounded_button"
         android:layout_gravity="end"
         android:id="@+id/button5"
         android:layout_width="120dp"
@@ -50,7 +51,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
         android:layout_marginStart="40dp"
@@ -58,6 +59,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:background="@drawable/rounded_button"
             android:id="@+id/button7"
             android:layout_width="120dp"
             android:layout_height="80dp"

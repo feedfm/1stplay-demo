@@ -25,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
     TextView resetTv;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -41,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Station cyclingStation = audioPlayer.getStationList().getStationWithName("SinglePlayCycling");
                 Station runningStation = audioPlayer.getStationList().getStationWithName("SinglePlayRunning");
-                Station recentPop = audioPlayer.getStationList().getStationWithName("Recent Pop ");
+                Station recentPop = audioPlayer.getStationList().getStationWithName("Recent Pop");
 
                 running.setOnClickListener(View -> {
                     if(runningStation != null && runningStation.hasNewMusic()) {

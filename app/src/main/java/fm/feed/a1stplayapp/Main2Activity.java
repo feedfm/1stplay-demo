@@ -28,7 +28,6 @@ public class Main2Activity extends AppCompatActivity  implements FeedAudioPlayer
         if(feedPlayer != null) {
             feedPlayer.removePlayListener(Main2Activity.this);
         }
-
     }
 
     @Override
@@ -45,9 +44,9 @@ public class Main2Activity extends AppCompatActivity  implements FeedAudioPlayer
             @Override
             public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {
                 feedPlayer = feedAudioPlayer;
+                feedPlayer.setVolume((float) 0.4);
                 feedPlayer.prepareToPlay(null);
                 stationName.setText(feedAudioPlayer.getActiveStation().getName());
-
                 if(feedAudioPlayer.getActiveStation().containsOption("first_play"))
                 {
                     Boolean obj = Boolean.valueOf((String)feedAudioPlayer.getActiveStation().getOption("first_play"));
@@ -58,21 +57,22 @@ public class Main2Activity extends AppCompatActivity  implements FeedAudioPlayer
                     else {
                         stTextView.setText(getString(R.string.second_workout));
                     }
-
                 }
                 feedAudioPlayer.addPlayListener(Main2Activity.this);
                 feedAudioPlayer.addStateListener(Main2Activity.this);
-                if(feedAudioPlayer.getCurrentPlay() != null)
+                if(feedAudioPlayer.getCurrentPlay() != null){
                     onPlayStarted(feedAudioPlayer.getCurrentPlay());
+                }
                 onStateChanged(feedAudioPlayer.getState());
                 playPauseButton.setOnClickListener(view -> {
-                    if(feedAudioPlayer.getState() == FeedAudioPlayer.State.PLAYING) {
-                        feedAudioPlayer.pause();
+                    if(videoView.isPlaying()) {
                         videoView.pause();
+                        playPauseButton.setText("Play");
+                        feedAudioPlayer.pause();
                     }
                     else {
-                        feedAudioPlayer.play();
                         videoView.start();
+                        playPauseButton.setText("Pause");
                     }
 
                 });
@@ -103,32 +103,30 @@ public class Main2Activity extends AppCompatActivity  implements FeedAudioPlayer
         String str = getIntent().getStringExtra("WORKOUT");
         videoView.setVideoPath(str);
         videoView.setOnPreparedListener(mediaPlayer -> {
-            playPauseButton.setOnClickListener(view -> {
-                if(feedPlayer.getState() == FeedAudioPlayer.State.PLAYING) {
-                    feedPlayer.pause();
-                    videoView.pause();
-                }
-                else {
-                    feedPlayer.play();
-                    videoView.start();
-                }
 
-            });
+            playPauseButton.setVisibility(View.VISIBLE);
         });
+        videoView.setOnInfoListener((mp, what, extra) -> {
+
+            if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                feedPlayer.play();
+                return true;
+            }
+            return false;
+        });
+
         videoView.setMediaController(new MediaController(this));
         videoView.requestFocus();
 
 
     }
-
-
+    
     @Override
     public void onStateChanged(FeedAudioPlayer.State state) {
 
         switch(state) {
             case PLAYING: playPauseButton.setText("Pause"); break;
             case PAUSED:  playPauseButton.setText("Play"); break;
-
         }
     }
 
