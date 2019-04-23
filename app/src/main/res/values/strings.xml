@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">1st Play App</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="first_workout">Welcome to Workout! This is your first time viewing this workout and you will hear the First Play Station in this order: \n 1. \n 2. \n 3. \n 4</string>
+    <string name="second_workout">Welcome back to Workout. You\'ve viewed this activity before. On this subsequent play, you will hear music shuffled from the designated Radio Station.</string>
+    <string name="info_main">1. The first time you play any Activity above, you will hear the First Play Station in order. \n2. On the subsequent play of the same Activity, you will hear music shuffled from the designated Radio Station.</string>
 </resources>

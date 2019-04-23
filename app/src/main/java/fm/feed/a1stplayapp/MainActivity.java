@@ -1,5 +1,7 @@
 package fm.feed.a1stplayapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,89 +10,83 @@ import android.widget.TextView;
 
 import fm.feed.android.playersdk.FeedAudioPlayer;
 import fm.feed.android.playersdk.FeedPlayerService;
+import fm.feed.android.playersdk.models.Station;
 import fm.feed.android.playersdk.models.StationList;
 
-public class MainActivity extends AppCompatActivity implements FeedAudioPlayer.StateListener {
+public class MainActivity extends AppCompatActivity {
 
-    TextView textView;
-    Button playPauseButton;
-    Button skipButton;
+    final static String RUNNING = "http://demo.feed.fm/Videos/Kristina_2_18_19_2c.mp4";
+    final static String CYCLING = "http://demo.feed.fm/Videos/Gregg_03_22_19_2.mp4";
+
+    Button running;
+    Button cycling;
     Button clearClientIDButton;
-    StationList stl;
-    StationList stl2;
+    FeedAudioPlayer feedAudioPlayer;
+    TextView resetTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final FeedAudioPlayer feedAudioPlayer;
 
-        textView = findViewById(R.id.textView);
-        playPauseButton =  findViewById(R.id.button);
-        skipButton =  findViewById(R.id.button2);
-        clearClientIDButton =  findViewById(R.id.button3);
+        setContentView(R.layout.activity_main2);
+        clearClientIDButton =  findViewById(R.id.button7);
+        resetTv = findViewById(R.id.resetTv);
+        running = findViewById(R.id.button4);
 
+        cycling = findViewById(R.id.button5);
         FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
             @Override
-            public void onPlayerAvailable(final FeedAudioPlayer feedAudioPlayer) {
-                stl = feedAudioPlayer.getStationList().getAllStationsWithOption("first_play", "true");
-                stl2 = feedAudioPlayer.getStationList().getAllStationsWithOption("first_play", "false");
-                feedAudioPlayer.addStateListener(MainActivity.this);
-                feedAudioPlayer.addOutOfMusicListener(new FeedAudioPlayer.OutOfMusicListener() {
-                    @Override
-                    public void onOutOfMusic() {
-                        if(feedAudioPlayer.getActiveStation().equals(stl.getFirst()))
-                        {
-                            feedAudioPlayer.setActiveStation(stl2.getFirst());
-                        }
+            public void onPlayerAvailable(final FeedAudioPlayer audioPlayer) {
+                feedAudioPlayer = audioPlayer;
+
+                Station cyclingStation = audioPlayer.getStationList().getStationWithName("SinglePlayCycling");
+                Station runningStation = audioPlayer.getStationList().getStationWithName("SinglePlayRunning");
+                Station recentPop = audioPlayer.getStationList().getStationWithName("Recent Pop ");
+
+                running.setOnClickListener(View -> {
+                    if(runningStation != null && runningStation.hasNewMusic()) {
+                        audioPlayer.setActiveStation(runningStation);
                     }
-                });
-                textView.setText("Session Available");
-                playPauseButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(feedAudioPlayer.getState() == FeedAudioPlayer.State.PLAYING)
-                        {
-                            feedAudioPlayer.pause();
-                        }
-                        else if(!stl.isEmpty() && stl.getFirst().hasNewMusic())
-                        {
-                            feedAudioPlayer.setActiveStation(stl.getFirst());
-                            textView.setText(stl.getFirst().getName());
-                            feedAudioPlayer.play();
-                        }
-                        else if(!stl2.isEmpty())
-                        {
-                            feedAudioPlayer.setActiveStation(stl2.getFirst());
-                            textView.setText(stl2.getFirst().getName());
-                            feedAudioPlayer.play();
-                        }
+                    else {
+                        audioPlayer.setActiveStation(recentPop);
                     }
+
+                    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                    intent.putExtra("WORKOUT", RUNNING);
+                    startActivity(intent);
+
                 });
 
-                skipButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        feedAudioPlayer.skip();
+                cycling.setOnClickListener(View -> {
+                    if(cyclingStation != null && cyclingStation.hasNewMusic()) {
+                        audioPlayer.setActiveStation(cyclingStation);
                     }
+                    else {
+                        audioPlayer.setActiveStation(recentPop);
+                    }
+
+                    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                    intent.putExtra("WORKOUT", CYCLING);
+                    startActivity(intent);
+
                 });
-                clearClientIDButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        textView.setText("Resetting client");
-                        feedAudioPlayer.createNewClientId(new FeedAudioPlayer.ClientIdListener() {
-                            @Override
-                            public void onClientId(String s) {
-                                feedAudioPlayer.setClientId(s);
-                                textView.setText("Client reset! Please kill and then restart the app to test first play again");
-                            }
+                clearClientIDButton.setOnClickListener(view -> {
+                    resetTv.setText("Resetting Session");
+                    audioPlayer.createNewClientId(new FeedAudioPlayer.ClientIdListener() {
+                        @Override
+                        public void onClientId(String s) {
+                            resetTv.setText("Resetting session");
+                            audioPlayer.setClientId(s);
+                            FeedPlayerService.initialize(getApplicationContext(),"dc46442cd85e0113f970684184c28ebe16f61e5a","df51028d44ff690cc746c1ad5bee4ab4a142f8a1");
 
-                            @Override
-                            public void onError() {
+                            recreate();
+                        }
 
-                            }
-                        });
-                    }
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
                 });
             }
 
@@ -101,15 +97,7 @@ public class MainActivity extends AppCompatActivity implements FeedAudioPlayer.S
         });
     }
 
-    @Override
-    public void onStateChanged(FeedAudioPlayer.State state) {
 
-        switch(state) {
-            case PLAYING: playPauseButton.setText("Pause"); break;
-            case PAUSED:  playPauseButton.setText("Play"); break;
-
-        }
-    }
 
 
 }
