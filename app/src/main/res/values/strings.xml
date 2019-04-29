@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">1st Play App</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="first_workout_running">Welcome to Workout! This is your first time viewing this workout and you will hear the First Play Station in this order: \n 1.Side To Side (Phantoms Remix) - Ariana Grande \n 2.Wish You Hell - Like a Storm\n 3. Wonderwall - Ryan Adams</string>
+    <string name="first_workout_running">Welcome to Workout! This is your first time viewing this workout and you will hear the First Play Station in this order: \n 1.Side To Side (Phantoms Remix) - Ariana Grande \n 2.Wish You Hell - Like a Storm\n 3.Wonderwall - Ryan Adams</string>
     <string name="first_workout_cycling">Welcome to Workout! This is your first time viewing this workout and you will hear the First Play Station in this order: \n 1.Still Falling for you - Ellie Goulding\n 2.We Found Love - Rihanna\n 3.Wild Things - Alessia Cara</string>
 
     <string name="second_workout">Welcome back to Workout. You\'ve viewed this activity before. On this subsequent play, you will hear music shuffled from the designated Radio Station.</string>
