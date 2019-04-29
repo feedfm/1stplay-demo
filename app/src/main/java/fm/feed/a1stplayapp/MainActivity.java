@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                     intent.putExtra("WORKOUT", RUNNING);
+                    intent.putExtra("WORKOUT_TYPE", "RUNNING");
                     startActivity(intent);
 
                 });
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                     intent.putExtra("WORKOUT", CYCLING);
+                    intent.putExtra("WORKOUT_TYPE", "CYCLING");
                     startActivity(intent);
 
                 });

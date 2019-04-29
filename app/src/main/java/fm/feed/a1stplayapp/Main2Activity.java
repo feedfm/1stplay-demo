@@ -52,7 +52,13 @@ public class Main2Activity extends AppCompatActivity  implements FeedAudioPlayer
                     Boolean obj = Boolean.valueOf((String)feedAudioPlayer.getActiveStation().getOption("first_play"));
                     if(obj)
                     {
-                        stTextView.setText(getString(R.string.first_workout));
+                        if(getIntent().getStringExtra("WORKOUT_TYPE").contains("CYCLING"))
+                        {
+                            stTextView.setText(getString(R.string.first_workout_cycling));
+                        }
+                        else {
+                            stTextView.setText(getString(R.string.first_workout_running));
+                        }
                     }
                     else {
                         stTextView.setText(getString(R.string.second_workout));
@@ -120,7 +126,7 @@ public class Main2Activity extends AppCompatActivity  implements FeedAudioPlayer
 
 
     }
-    
+
     @Override
     public void onStateChanged(FeedAudioPlayer.State state) {
 
