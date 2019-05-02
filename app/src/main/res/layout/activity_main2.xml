@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#CEE6E6"
     android:layout_height="match_parent"
-    android:layout_marginTop="50dp"
+    android:paddingTop="50dp"
     tools:context=".Main2Activity">
 
     <LinearLayout
@@ -14,12 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <Button
-        android:background="@drawable/rounded_button"
-        android:id="@+id/button4"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:text="Workout with Kristina" />
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/nunito"
+            android:text="Workout with Kristina" />
 
     <Button
         android:visibility="invisible"
@@ -27,13 +29,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-    <Button
-        android:background="@drawable/rounded_button"
-        android:layout_gravity="end"
-        android:id="@+id/button5"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:text="Cycling With Greg" />
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_gravity="end"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/nunito"
+            android:text="Cycling With \nGreg" />
 
     </LinearLayout>
 
@@ -45,13 +48,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:fontFamily="@font/nunito"
+            android:text="@string/info_main"
             android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-            android:textSize="18sp"
-            android:text="@string/info_main" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
         android:layout_marginStart="40dp"
@@ -59,18 +64,21 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:background="@drawable/rounded_button"
             android:id="@+id/button7"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/nunito"
             android:text="Reset" />
 
         <TextView
             android:id="@+id/resetTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="To reset this demo and view the First Play demo again please click on Reset"/>
+            android:fontFamily="@font/nunito"
+            android:layout_marginStart="10dp"
+            android:text="To reset this demo and view the First Play demo again please click on Reset"
+            android:textSize="16sp" />
 
     </LinearLayout>
 </LinearLayout>

@@ -3,22 +3,23 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <layer-list>
-            <item>
-                <shape android:shape="oval">
+            <!--<item>
+                <shape android:shape="rectangle">
                     <gradient
                         android:startColor="#FF000000"
                         android:endColor="#00000000"
 
-                        android:gradientRadius="55dp"
+                        android:gradientRadius="60dp"
                         android:type="radial"
                         />
                 </shape>
-            </item>
-            <item android:top="1dp" android:left="1dp" android:right="1dp" android:bottom="1dp">
-                <shape android:shape="oval">
-                    <size android:width="55dp"
-                        android:height="55dp"/>
-                    <solid android:color="@android:color/white" />
+            </item>-->
+            <item android:top="2dp" android:left="2dp" android:right="2dp" android:bottom="2dp">
+                <shape android:shape="rectangle">
+                    <corners android:radius="20dip" />
+                    <size android:width="50dp"
+                        android:height="50dp"/>
+                    <solid android:color="#ECECEC" />
                 </shape>
             </item>
 

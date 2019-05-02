@@ -15,8 +15,8 @@ import fm.feed.android.playersdk.models.StationList;
 
 public class MainActivity extends AppCompatActivity {
 
-    final static String RUNNING = "http://demo.feed.fm/Videos/Kristina_2_18_19_2c.mp4";
-    final static String CYCLING = "http://demo.feed.fm/Videos/Gregg_03_22_19_2.mp4";
+    final static String RUNNING = "https://demo.feed.fm/Videos/Kristina_2_18_19_2c.mp4";
+    final static String CYCLING = "https://demo.feed.fm/Videos/Gregg_03_22_19_2.mp4";
 
     Button running;
     Button cycling;

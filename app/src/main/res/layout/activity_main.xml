@@ -3,34 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_margin="16dp"
+    android:padding="16dp"
+    android:background="#CEE6E6"
     android:layout_weight="1"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tvStationName"
-        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_width="match_parent"
+        android:fontFamily="@font/nunito"
+        android:gravity="center_horizontal"
         android:text="Station Name"
-        android:textSize="20sp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_height="wrap_content" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvWorkOutInfoAndList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-         />
+        android:fontFamily="@font/nunito"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:paddingTop="50dp"
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,13 +49,13 @@
             android:text="" />
 
         <Button
-            android:background="@drawable/rounded_button"
             android:id="@+id/button"
-            android:visibility="invisible"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Play" />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/nunito"
+            android:text="Skip" />
 
     </LinearLayout>
 </LinearLayout>
